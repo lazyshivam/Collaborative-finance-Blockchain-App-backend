@@ -17,7 +17,7 @@ const router = express.Router();
 
 const defaultRoutes = [
   { path: '/company', route: companyRoute },
-  
+  {path:'/admin/company',route:AdminCompanyRoute},
   { path: '/admin', route: AdminAuthRoute },
   { path: '/admin/dashboard', route: AdminDashboardRoute },
   { path: '/admin/roles', route: AdminRoleRoute },
