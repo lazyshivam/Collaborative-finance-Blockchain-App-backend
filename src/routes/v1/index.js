@@ -2,10 +2,6 @@ const express = require('express');
 const companyRoute = require('./company.route');
 
 const AdminAuthRoute = require('./admin/auth.route');
-const AdminRoleRoute = require('./admin/role.route');
-const AdminStaffRoute = require('./admin/staff.route');
-const AdminCompanyRoute = require('./admin/company.route');
-const AdminDashboardRoute = require('./admin/dashboard.route');
 const userTicketRoute=require('./ticket.route');
 const companySubscriptionRoute = require('./companySubscription.route');
 const ourServicesRoute = require('./ourServices.route');
@@ -17,11 +13,7 @@ const router = express.Router();
 
 const defaultRoutes = [
   { path: '/company', route: companyRoute },
-  {path:'/admin/company',route:AdminCompanyRoute},
   { path: '/admin', route: AdminAuthRoute },
-  { path: '/admin/dashboard', route: AdminDashboardRoute },
-  { path: '/admin/roles', route: AdminRoleRoute },
-  { path: '/admin/staff', route: AdminStaffRoute },
   {path:'/userTickets',route: userTicketRoute },
   // { path: '/admin/report', route: AdminDashboardRoute },
 
