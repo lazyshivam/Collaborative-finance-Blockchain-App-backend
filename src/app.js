@@ -12,7 +12,7 @@ const { helpers } = require('./helpers');
 const { jwtStrategy } = require('./config/passport');
 const { authLimiter } = require('./middlewares/rateLimiter');
 const routes = require('./routes/v1');
-const redirectRoute = require('./routes/urlRedirect.route');
+// const redirectRoute = require('./routes/urlRedirect.route');
 const { errorConverter, errorHandler } = require('./middlewares/error');
 // const ApiError = require('./utils/ApiError');
 // const path = require('path');
@@ -55,7 +55,7 @@ if (config.env === 'production') {
 
 // v1 api routes
 app.use('/v1', routes);
-app.use('/', redirectRoute);
+// app.use('/', redirectRoute);
 app.use('/testServer',(req,res)=>{
   res.send("Hello From Server");
 })

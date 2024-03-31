@@ -22,7 +22,6 @@ const defaultRoutes = [
   { path: '/admin/dashboard', route: AdminDashboardRoute },
   { path: '/admin/roles', route: AdminRoleRoute },
   { path: '/admin/staff', route: AdminStaffRoute },
-  { path: '/admin/company', route: AdminCompanyRoute },
   {path:'/userTickets',route: userTicketRoute },
   // { path: '/admin/report', route: AdminDashboardRoute },
 

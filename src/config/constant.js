@@ -65,33 +65,9 @@ module.exports = {
     ADMIN_COMPANY_CREATE: 'Company information has been successfully created',
 
 
-    PINCODE_NOT_FOUND: 'No record found',
-    PINCODE_LIST: 'Pincode List',
-    PINCODE_DETAILS: 'Pincode details',
-    PINCODE_STATUS_DELETE: 'Pincode is deleted successfully',
-    PINCODE_STATUS_INACTIVE: 'The status of the Pincode is inactive successful',
-    PINCODE_STATUS_ACTIVE: 'The status of the Pincode is active successful',
-    PINCODE_NAME_ALREADY_EXISTS: 'The name is already exists. Please use a different name',
-    PINCODE_EMAIL_ALREADY_EXISTS: 'The email is already exists. Please use a different email',
-    PINCODE_UPDATE: 'Pincode information has been successfully updated',
-    PINCODE_CREATE: 'Thanks for the Pincode',
-
-    SHORTEN_NOT_FOUND: 'No record found',
-    SHORTEN_LIST: 'Urls List',
-    SHORTEN_DETAILS: 'Url details',
-    SHORTEN_STATUS_DELETE: 'Url is deleted successfully',
-    SHORTEN_STATUS_INACTIVE: 'The status of the url is inactive successful',
-    SHORTEN_STATUS_ACTIVE: 'The status of the url is active successful',
-    SHORTEN_UPDATE: 'Url has been successfully updated',
-    SHORTEN_CREATE: 'Link has been shortened',
-
+   
     DATA_NOT_FOUND: 'No record found',
-    CAR_BRAND_LIST: 'Car Brand List',
-    CAR_MODEL_LIST: 'Car Model List',
-    CAR_MODEL_Versions_LIST: 'Car Model Versions List',
-
-    SMS_SEND: "SMS sent successfully",
-
+    EMAIL_VERIFICATION:'Email verification link send',
 
     // ticket constants
     TICKET_RAISED: "Ticket raised successfully",

@@ -86,12 +86,14 @@ const resetPassword = catchAsync(async (req, res) => {
 // email verification of registered user
 
 const verifyEmail = catchAsync(async (req, res) => {
+
     var response = await CompanyService.verifyUserEmail(req.query.token);
     res.send(response);
 
 });
 const resendEmailVerification = catchAsync(async (req, res) => {
     const email = req.body.email;
+    console.log(email);
     const response = await CompanyService.resendUserEmailVerification(email);
 
     res.send(response);

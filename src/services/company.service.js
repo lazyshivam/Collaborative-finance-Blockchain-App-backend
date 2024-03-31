@@ -100,6 +100,7 @@ const getCompanyById = async (id) => {
  */
 const updateCompanyById = async (userId, updateBody) => {
   const company = await getCompanyById(userId);
+  // console.log(company)
   if (!company) {
     return { data: {}, code: CONSTANT.NOT_FOUND, message: CONSTANT.COMPANY_NOT_FOUND, };
   }
@@ -319,13 +320,14 @@ const verifyUserEmail = async (verifyToken) => {
       tokenTypes.EMAIL_VERIFICATION
     );
     console.log("🚀 ~ verifyUserEmail ~ verificationTokenDoc:", verificationTokenDoc);
+    // const user = await CompanyModel.findById({ _id: verificationTokenDoc.user });
+    // console.log(user,"this is yser")
+    // if (user.emailVerificationStatus == true) {
 
-    if (user.emailVerificationStatus == true) {
-
-      return { data: {}, code: CONSTANT.BAD_REQUEST, message: CONSTANT.USER_ALREADY_VERIFIED, };
-    }
+    //   return { data: {}, code: CONSTANT.BAD_REQUEST, message: CONSTANT.USER_ALREADY_VERIFIED, };
+    // }
     await tokenService.deleteToken(verifyToken, tokenTypes.EMAIL_VERIFICATION);
-    await updateCompanyById(user._id, { emailVerificationStatus: true });
+    await updateCompanyById(verificationTokenDoc.user, { emailVerificationStatus: true });
     return { data: {}, code: CONSTANT.SUCCESSFUL, message: "Email verified successfully" };
 
   } catch (error) {
@@ -336,8 +338,8 @@ const verifyUserEmail = async (verifyToken) => {
 const resendUserEmailVerification = async (userEmail) => {
   const user = await CompanyModel.findOne({ email: userEmail });
   const token = await tokenService.generateEmailVerificationToken(user);
-  await mailFunctions.sendVerificationEmail(user.email, token);
-  return { data: user, code: 200, message: CONSTANT.COMPANY_CREATE };
+  await mailFunctions.sendVerificationEmail(user, token);
+  return { data: [], code: 200, message: CONSTANT.EMAIL_VERIFICATION };
 };
 
 module.exports = {
