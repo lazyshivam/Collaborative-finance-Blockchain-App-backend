@@ -35,7 +35,7 @@ function sendVerificationEmail(company, token) {
 }
 
 function sendTicketReplyEmail(userEmail, name, ticketDetails) {
-  const subject = `Ticket Reply: ${ticketDetails.subject}`;
+    const subject = `Ticket Reply: ${ticketDetails.subject}`;
   const htmlBody = `
     <p>Hi ${name},</p>
     <p>We are writing to inform you about a reply to your ticket (ID: ${ticketDetails._id}) regarding ${ticketDetails.subject}.</p>
