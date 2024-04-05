@@ -6,6 +6,7 @@ const tokenService = require("./token.service");
 // const {emailVerificationToken}=require('../helpers/emailVerificationToken.js');
 const bcrypt = require("bcryptjs");
 const mailFunctions = require("../helpers/mailFunctions");
+const jwt =require('jsonwebtoken');
 
 /**
  * Get user by id
@@ -190,21 +191,52 @@ const refreshAuth = async (refreshToken) => {
  * @param {string} newPassword
  * @returns {Promise}
  */
+// const resetPassword = async (resetPasswordToken, newPassword) => {
+//   try {
+//     const resetPasswordTokenDoc = await tokenService.verifyToken(
+//       resetPasswordToken,
+//       tokenTypes.RESET_PASSWORD
+//     );
+//     var company = await CompanyModel.findOne({
+//       _id: resetPasswordTokenDoc.user,
+//     });
+//     await updateCompanyById(company._id, { password: newPassword });
+//     await Token.deleteMany({ user: company._id, type: tokenTypes.RESET_PASSWORD, });
+
+//     return { data: {}, code: CONSTANT.SUCCESSFUL, message: "Password updated successfully", };
+//   } catch (error) {
+//     return { data: {}, code: CONSTANT.UNAUTHORIZED, message: "Password reset failed", };
+//   }
+// };
+/**
+ * Reset password
+ * @param {string} resetPasswordToken
+ * @param {string} newPassword
+ * @returns {Promise}
+ */
 const resetPassword = async (resetPasswordToken, newPassword) => {
+  console.log('reset password', resetPasswordToken,newPassword);
   try {
     const resetPasswordTokenDoc = await tokenService.verifyToken(
       resetPasswordToken,
       tokenTypes.RESET_PASSWORD
     );
-    var company = await CompanyModel.findOne({
-      _id: resetPasswordTokenDoc.user,
-    });
-    await updateCompanyById(company._id, { password: newPassword });
-    await Token.deleteMany({ user: company._id, type: tokenTypes.RESET_PASSWORD, });
+    // var user = await UserModel.findOne({
+    //   _id: resetPasswordTokenDoc.user,
+    // });
+    await updateUserById(resetPasswordTokenDoc.user, { password: newPassword });
+    await Token.deleteMany({ user: resetPasswordTokenDoc.user, type: tokenTypes.RESET_PASSWORD, });
 
     return { data: {}, code: CONSTANT.SUCCESSFUL, message: "Password updated successfully", };
   } catch (error) {
-    return { data: {}, code: CONSTANT.UNAUTHORIZED, message: "Password reset failed", };
+    if (error instanceof jwt.TokenExpiredError) {
+      return { data: {}, code: CONSTANT.UNAUTHORIZED, message: "Reset token expired. Please request a new password reset link." };
+    } else if (error instanceof jwt.JsonWebTokenError) {
+      return { data: {}, code: CONSTANT.UNAUTHORIZED, message: "Invalid reset token. Please make sure you're using the correct link." };
+    } else {
+      console.error(error);
+      return { data: {}, code: CONSTANT.INTERNAL_SERVER_ERROR, message: "Internal server error. Please try again later." };
+    }
   }
 };
 
