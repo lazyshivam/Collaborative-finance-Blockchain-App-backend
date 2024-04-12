@@ -224,7 +224,7 @@ const resetPassword = async (resetPasswordToken, newPassword) => {
     // var user = await UserModel.findOne({
     //   _id: resetPasswordTokenDoc.user,
     // });
-    await updateUserById(resetPasswordTokenDoc.user, { password: newPassword });
+    await updateCompanyById(resetPasswordTokenDoc.user, { password: newPassword });
     await Token.deleteMany({ user: resetPasswordTokenDoc.user, type: tokenTypes.RESET_PASSWORD, });
 
     return { data: {}, code: CONSTANT.SUCCESSFUL, message: "Password updated successfully", };
@@ -338,7 +338,8 @@ const loginUserWithEmailAndPassword = async (email, password) => {
   // Check if user email is verified
   if (!details.emailVerificationStatus) {
     // Sending verification email reminder
-    return { data: {}, code: CONSTANT.BAD_REQUEST, message: CONSTANT.VERIFICATION_REQUIRED_MSG, };
+    await resendUserEmailVerification(email);
+    return { data: {}, code: CONSTANT.BAD_REQUEST, message:"Please! verify your email first, email varification link has been sent to your register email", };
   }
   return { data: details, code: CONSTANT.SUCCESSFUL, message: CONSTANT.UNAUTHORIZED_MSG, };
 };
@@ -363,7 +364,7 @@ const verifyUserEmail = async (verifyToken) => {
     return { data: {}, code: CONSTANT.SUCCESSFUL, message: "Email verified successfully" };
 
   } catch (error) {
-    return { data: {}, code: CONSTANT.BAD_REQUEST, message: "Email veification failed" };
+    return { data: {}, code: CONSTANT.BAD_REQUEST, message: "Email veification failed,Please try again with new link " };
   }
 };
 //   again vefication of user email if user email is not verified

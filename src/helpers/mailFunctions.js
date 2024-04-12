@@ -25,7 +25,7 @@ function sendVerificationEmail(company, token) {
   const emailTemplate = `
     <p>Hi ${name},</p>
     <p>Thank you for signing up. Please verify your email address by clicking the following link:</p>
-    <a href="${verificationLink}">Verify Email</a>
+    <a href="${verificationLink}">${verificationLink}</a>
     <p>If you did not create an account, please ignore this email or reply to let us know.</p>
     <p>This link is valid for 30 minutes.</p>
     <p>Kind Regards</p>
@@ -72,7 +72,7 @@ function sendResetPasswordEmail(userEmail, token, type) {
       <p>Hi,</p>
       <p>You have requested to reset your password.</p>
       <p>To reset your password, click the following link and follow the instructions:</p>
-      <a href="${url}">Reset Your Password</a>
+      <a href="${url}">${url}</a>
       <p>If you did not request a password reset, please ignore this email or reply to let us know.</p>
       <p>This password reset is only valid for 30 minutes.</p>
       <p>Kind Regards</p>
