@@ -375,7 +375,13 @@ const resendUserEmailVerification = async (userEmail) => {
   return { data: [], code: 200, message: CONSTANT.EMAIL_VERIFICATION };
 };
 
+const saveUserFeedback = async (feedback) => {
+   
+  return {data:{feedback:feedback},code:200,message:"Feedback saved successfully"}
+}
+
 module.exports = {
+  saveUserFeedback,
   createCompany,
   queryCompanies,
   getCompanyById,

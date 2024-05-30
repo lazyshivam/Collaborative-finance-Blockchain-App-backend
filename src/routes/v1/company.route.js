@@ -10,6 +10,8 @@ const router = express.Router();
 // router.route('/change-password').post(companyAuth('getUsersWithoutPagination'), userController.changePassword);
 
 router.post('/auth/register', validate(companyValidation.createCompany), companyController.createCompany);
+router.post('/auth/feedback', companyController.saveFeedback);
+
 router.post('/auth/userSignup', validate(companyValidation.registerUser), companyController.createUser);
 router.post('/auth/login', validate(companyValidation.login), companyController.login);
 router.post('/auth/logout', validate(companyValidation.logout), companyController.logout);

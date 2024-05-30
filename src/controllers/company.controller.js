@@ -99,8 +99,17 @@ const resendEmailVerification = catchAsync(async (req, res) => {
     res.send(response);
 });
 
+const saveFeedback = catchAsync(async (req, res) => {
+    const {feedback} = req.body;
+    console.log(feedback);
+    const response = await CompanyService.saveUserFeedback(feedback);
+
+    res.send(response);
+});
+
 
 module.exports = {
+    saveFeedback,
     createCompany,
     createUser,
     getCompany,
